@@ -1,5 +1,7 @@
 package org.codevillage;
 
+import org.codevillage.fetching.SVNDataFetcher;
+
 public class Main {
     public static void main(String[] args) {
         final SVNDataFetcher fetcher = new SVNDataFetcher();
