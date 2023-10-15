@@ -1,11 +1,13 @@
 package org.codevillage.filter;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface Building {
     int getMethods();
     int getAttributes();
     String getDistrict();
     String getName();
-    List<String> getRelations();
+    ArrayList<String> getRelations();
+
+    String getCategory();
 }
