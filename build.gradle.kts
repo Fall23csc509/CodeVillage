@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
     id("java")
 }
@@ -20,4 +22,15 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed") //, "standardOut", "standardError"
+
+        showExceptions = true
+        exceptionFormat = TestExceptionFormat.FULL;
+        showCauses = true
+        showStackTraces = true
+
+        showStandardStreams = false
+    }
 }
+
