@@ -1,11 +1,14 @@
 package org.codevillage;
 
+import org.codevillage.fetching.GithubDataFetcher;
 import org.codevillage.fetching.SVNDataFetcher;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        final SVNDataFetcher fetcher = new SVNDataFetcher();
-        // make dir temp
-        fetcher.downloadPackage("", "./.temp");
+        System.out.println("Hello World!");
     }
 }
+
