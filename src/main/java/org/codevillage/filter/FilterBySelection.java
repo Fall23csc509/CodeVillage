@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 public class FilterBySelection {
 
     public static ArrayList<Building> filter(ArrayList<Building> buildings, ArrayList<Building> selection){
-        List<String> selectedBuildingNames = selection.stream()
-                .map(Building::getName)  // Get the names of the selected buildings
-                .collect(Collectors.toList());
+        List<String> relatedBuildings = new ArrayList<String>();
+        selection.stream()
+                .flatMap(building -> building.getRelations().stream())
+                .forEach(relatedBuildings::add);; // Get the names of the related buildings
 
-        return buildings.stream()
+        ArrayList<Building> newSelection = buildings.stream()
                 .filter(building -> {
-                    ArrayList<String> relatedBuildingNames = building.getRelations();  // Get related building names
-                    for (String relatedName : relatedBuildingNames) {
-                        if (selectedBuildingNames.contains(relatedName)) {
-                            return true;  // The building is related to a selected building, so add it to the array
-                        }
-                    }
-                    return false;
+                    return relatedBuildings.contains(building.getName());
                 })
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList<Building>::new));
+
+        newSelection.addAll(selection);
+        return newSelection.stream().distinct().collect(Collectors.toCollection(ArrayList<Building>::new)); // Enforce uniqueness
+
+
     }
 }
