@@ -54,6 +54,7 @@ public class FetchingTests {
         localDataFetcher.downloadPackage(sourceFileURL, targetDirectory);
         // Verify that the files were copied successfully
         final File tempFolder = new File(targetDirectory);
+        System.out.println(tempFolder.listFiles());
         assert (tempFolder.listFiles().length > 0);
 
         // Delete the temp directory
