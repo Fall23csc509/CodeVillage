@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Fulfils requirement 21. Select buildings in the Village that relate to the current selection
+ */
 public class FilterBySelection {
 
     public static ArrayList<JavaClass> filter(ArrayList<JavaClass> javaClasses, ArrayList<JavaClass> selection){

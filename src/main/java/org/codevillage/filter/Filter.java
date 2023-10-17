@@ -2,6 +2,9 @@ package org.codevillage.filter;
 
 import java.util.ArrayList;
 
+/**
+ * Fulfils requirements 18-21.
+ */
 public class Filter {
 
     public static ArrayList<JavaClass> byString(ArrayList<JavaClass> javaClasses, String query){
