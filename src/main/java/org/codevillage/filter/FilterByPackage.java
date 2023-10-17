@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class FilterByPackage {
-    public static ArrayList<Building> filter(ArrayList<Building> buildings, String packageName){
-        return buildings.stream()
-                .filter(building -> building.getDistrict().equals(packageName))
+    public static ArrayList<JavaClass> filter(ArrayList<JavaClass> javaClasses, String packageName){
+        return javaClasses.stream()
+                .filter(javaClass -> javaClass.getPackageName().equals(packageName))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

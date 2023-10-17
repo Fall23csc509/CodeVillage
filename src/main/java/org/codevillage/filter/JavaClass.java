@@ -2,29 +2,29 @@ package org.codevillage.filter;
 
 import java.util.ArrayList;
 
-public class Building {
+public class JavaClass {
 
     private String name;
     private int methods;
 
     private int attributes;
-    private String district;
+    private String packageName;
     private ArrayList<String> relations;
     private String category;
 
-    public Building(){
+    public JavaClass(){
         this.name = null;
         this.methods = 0;
         this.attributes = 0;
-        this.district = null;
+        this.packageName = null;
         this.relations = null;
         this.category  = null;
     }
-    public Building(String name, int methods, int attributes, String district, ArrayList<String> relations, String category ) {
+    public JavaClass(String name, int methods, int attributes, String packageName, ArrayList<String> relations, String category ) {
         this.name = name;
         this.methods = methods;
         this.attributes = attributes;
-        this.district = district;
+        this.packageName = packageName;
         this.relations = relations;
         this.category  = category;
     }
@@ -41,8 +41,8 @@ public class Building {
         return attributes;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getPackageName() {
+        return packageName;
     }
 
     public ArrayList<String> getRelations() {
@@ -65,8 +65,8 @@ public class Building {
         this.attributes = attributes;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 
     public void setRelations(ArrayList<String> relations) {
@@ -79,11 +79,11 @@ public class Building {
 
     @Override
     public String toString() {
-        return "Building{" +
+        return "JavaClass{" +
                 "name='" + name + '\'' +
                 ", methods=" + methods +
                 ", attributes=" + attributes +
-                ", district='" + district + '\'' +
+                ", district='" + packageName + '\'' +
                 ", relations=" + relations +
                 ", category='" + category + '\'' +
                 '}';

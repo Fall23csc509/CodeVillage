@@ -6,20 +6,20 @@ import java.util.stream.Collectors;
 
 public class FilterBySelection {
 
-    public static ArrayList<Building> filter(ArrayList<Building> buildings, ArrayList<Building> selection){
+    public static ArrayList<JavaClass> filter(ArrayList<JavaClass> javaClasses, ArrayList<JavaClass> selection){
         List<String> relatedBuildings = new ArrayList<String>();
         selection.stream()
                 .flatMap(building -> building.getRelations().stream())
-                .forEach(relatedBuildings::add);; // Get the names of the related buildings
+                .forEach(relatedBuildings::add);; // Get the names of the related javaClasses
 
-        ArrayList<Building> newSelection = buildings.stream()
-                .filter(building -> {
-                    return relatedBuildings.contains(building.getName());
+        ArrayList<JavaClass> newSelection = javaClasses.stream()
+                .filter(javaClass -> {
+                    return relatedBuildings.contains(javaClass.getName());
                 })
-                .collect(Collectors.toCollection(ArrayList<Building>::new));
+                .collect(Collectors.toCollection(ArrayList<JavaClass>::new));
 
         newSelection.addAll(selection);
-        return newSelection.stream().distinct().collect(Collectors.toCollection(ArrayList<Building>::new)); // Enforce uniqueness
+        return newSelection.stream().distinct().collect(Collectors.toCollection(ArrayList<JavaClass>::new)); // Enforce uniqueness
 
 
     }

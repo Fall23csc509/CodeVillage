@@ -8,16 +8,16 @@ public class Main {
     }
 
     public static void filterSelections(){
-        ArrayList<Building> testBuildings = new ArrayList<Building>();
-        Building building1 = new Building("test1", 1, 2, "district1", new ArrayList<String>(){{
+        ArrayList<JavaClass> testBuildings = new ArrayList<JavaClass>();
+        JavaClass building1 = new JavaClass("test1", 1, 2, "district1", new ArrayList<String>(){{
             add("test2");}
         }, "class");
 
-        Building building2 = new Building("test2", 1, 2, "district2", new ArrayList<String>(){{
+        JavaClass building2 = new JavaClass("test2", 1, 2, "district2", new ArrayList<String>(){{
             add("test3");}
         }, "class");
 
-        Building building3 = new Building("test3", 1, 2, "district3", new ArrayList<String>(){{
+        JavaClass building3 = new JavaClass("test3", 1, 2, "district3", new ArrayList<String>(){{
             add("test1");
         add("test3");}
         }, "class");
@@ -26,7 +26,7 @@ public class Main {
         testBuildings.add(building2);
         testBuildings.add(building3);
 
-        ArrayList<Building> testSelection = new ArrayList<Building>(){
+        ArrayList<JavaClass> testSelection = new ArrayList<JavaClass>(){
             {
                 add(building1);
 //                add(building2);
