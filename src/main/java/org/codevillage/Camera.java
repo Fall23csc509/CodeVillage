@@ -1,79 +1,32 @@
 package org.codevillage;
 
-public class Camera implements MovementController {
-    private Vector3 position;
-    // NOTE - Lucas: I think we should also use Vector3 for rotations, more self-explanatory.
-    // Thus: private Vector3 rotation;
-    private float yaw;
-    private float pitch;
-    private MovementController movementController;
+public class Camera {
+    private int cameraX;
+    private int cameraY;
 
-    // Constructor
     public Camera() {
-        this.position = new Vector3(0, 0, 0); // Initialize the position
-
-        this.yaw = 0.0f; // Initialize yaw
-        this.pitch = 0.0f; // Initialize pitch
-
-        // this.movementController = new HorizontalMovementController(); // Initialize with HorizontalMovementController
+        cameraX = 0;
+        cameraY = 0;
     }
 
-    // Implement methods from the MovementController interface
-    @Override
-    public void moveForward() {
-        movementController.moveForward();
+    public int getCameraX() {
+        return cameraX;
     }
 
-    @Override
-    public void moveBackward() {
-        movementController.moveBackward();
+    public int getCameraY() {
+        return cameraY;
     }
 
-    @Override
-    public void moveLeft() {
-        movementController.moveLeft();
+    public void setCameraX(int cameraX) {
+        this.cameraX = cameraX;
     }
 
-    @Override
-    public void moveRight() {
-        movementController.moveRight();
+    public void setCameraY(int cameraY) {
+        this.cameraY = cameraY;
     }
 
-    // Other methods and properties specific to the Camera class
-
-    // Getter and setter methods for position, yaw, and pitch
-
-    public Vector3 getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector3 position) {
-        this.position = position;
-    }
-
-    public float getYaw() {
-        return yaw;
-    }
-
-    public void setYaw(float yaw) {
-        this.yaw = yaw;
-    }
-
-    public float getPitch() {
-        return pitch;
-    }
-
-    public void setPitch(float pitch) {
-        this.pitch = pitch;
-    }
-
-    // Getter and setter for the movement controller
-
-    public MovementController getMovementController() {
-        return movementController;
-    }
-
-    public void setMovementController(MovementController movementController) {
-        this.movementController = movementController;
+    public void moveCamera(int dx, int dy) {
+        setCameraX(cameraX + dx);
+        setCameraY(cameraY + dy);
     }
 }
