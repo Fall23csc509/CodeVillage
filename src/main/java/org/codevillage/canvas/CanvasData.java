@@ -31,7 +31,7 @@ public class CanvasData extends Observable {
         shapes.remove(shape);
     }
 
-    public ArrayList<Shape> get(){
+    public ArrayList<Shape> getShapes(){
         return shapes;
     }
 }
