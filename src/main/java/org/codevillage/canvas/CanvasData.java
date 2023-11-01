@@ -24,12 +24,22 @@ public class CanvasData extends Observable {
         notifyObservers();
     }
 
+    public void addAll(List<Shape> newData){
+        shapes.addAll(newData);
+        setChanged();
+        notifyObservers();
+    }
+
     public void removeAll(){
         shapes.clear();
+        setChanged();
+        notifyObservers();
     }
 
     public void remove(Shape shape){
         shapes.remove(shape);
+        setChanged();
+        notifyObservers();
     }
 
     public List<Shape> getShapes(){
