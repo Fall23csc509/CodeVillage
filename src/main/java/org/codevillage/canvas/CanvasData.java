@@ -1,11 +1,12 @@
 package org.codevillage.canvas;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 public class CanvasData extends Observable {
     private static CanvasData instance;
-    private ArrayList<Shape> shapes;
+    private List<Shape> shapes;
     private CanvasData(){
         this.shapes = new ArrayList<Shape>();
     }
@@ -31,7 +32,7 @@ public class CanvasData extends Observable {
         shapes.remove(shape);
     }
 
-    public ArrayList<Shape> getShapes(){
+    public List<Shape> getShapes(){
         return shapes;
     }
 }
