@@ -4,9 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 public class CameraKeyListener extends KeyAdapter {
-    
-    private Camera camera;
-
     @Override
     public void keyPressed(KeyEvent e) {
         int dx = 0;
@@ -23,6 +20,6 @@ public class CameraKeyListener extends KeyAdapter {
             dx = 10;
         }
 
-        camera.moveCamera(dx, dy);
+        Camera.getInstance().moveCamera(dx, dy);
     }
 }
