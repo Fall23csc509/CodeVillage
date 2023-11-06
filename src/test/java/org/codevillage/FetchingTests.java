@@ -1,3 +1,5 @@
+package org.codevillage;
+
 import org.codevillage.Utils;
 import org.codevillage.fetching.GithubDataFetcher;
 import org.codevillage.fetching.LocalDataFetcher;
@@ -6,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class FetchingTests {
     final String cwd = System.getProperty("user.dir");
@@ -17,12 +21,13 @@ public class FetchingTests {
         githubDataFetcher.downloadPackage(
                 "https://github.com/Fall23csc509/CodeVillage.git", targetPath);
         final File tempFolder = new File(targetPath);
-        assert (tempFolder.listFiles().length > 0);
+        assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
         // delete dir temp
         try {
             Utils.deleteDirectory(tempFolder.toPath());
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error deleting directory");
         }
         assert(!tempFolder.exists());
     }
@@ -34,12 +39,13 @@ public class FetchingTests {
                 String.format("file://%s/src/test/resources/svn_test_repo", cwd), targetPath
         );
         final File tempFolder = new File(targetPath);
-        assert (tempFolder.listFiles().length > 0);
+        assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
         // delete dir temp
         try {
             Utils.deleteDirectory(tempFolder.toPath());
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error deleting directory");
         }
         assert(!tempFolder.exists());
     }
@@ -54,14 +60,15 @@ public class FetchingTests {
         localDataFetcher.downloadPackage(sourceFileURL, targetDirectory);
         // Verify that the files were copied successfully
         final File tempFolder = new File(targetDirectory);
-        System.out.println(tempFolder.listFiles());
-        assert (tempFolder.listFiles().length > 0);
+        System.out.println(Arrays.toString(tempFolder.listFiles()));
+        assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
 
         // Delete the temp directory
         try {
             Utils.deleteDirectory(tempFolder.toPath());
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Error deleting directory");
         }
         assert (!tempFolder.exists());
     }
