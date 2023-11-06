@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
     id("java")
 }
@@ -11,6 +13,10 @@ repositories {
 }
 
 dependencies {
+    implementation("org.tmatesoft.svnkit:svnkit:1.10.11")
+    implementation("org.slf4j:slf4j-api:1.7.32")
+    implementation("ch.qos.logback:logback-classic:1.4.8")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.7.0.202309050840-r")
     implementation("com.github.javaparser:javaparser-core:3.25.1")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -18,4 +24,14 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed") //, "standardOut", "standardError"
+
+        showExceptions = true
+        exceptionFormat = TestExceptionFormat.FULL;
+        showCauses = true
+        showStackTraces = true
+
+        showStandardStreams = false
+    }
 }
