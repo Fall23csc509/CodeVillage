@@ -38,7 +38,7 @@ public class Main {
         JPanel canvas = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g); // do your superclass's painting routine first, and then paint on top of it.
+                super.paintComponent(g);
                 for(Neighborhood neighborhood : neighborhoods)
                 {
                     neighborhood.draw(g);
