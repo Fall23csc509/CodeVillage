@@ -5,29 +5,25 @@ import java.awt.*;
 public class Neighborhood implements Shape
 {
     private static final Color COLOR = new Color(24, 242, 235, 128);
-    private int top;
-    private int bottom;
-    private int left;
-    private int right;
+    private int centerX;
+    private int centerY;
+    private int width;
+    private int height;
 
-    public Neighborhood(int x1, int y1, int x2, int y2)
+    public Neighborhood()
     {
-        this.left = x1;
-        this.top = y1;
-        this.right = x2;
-        this.bottom = y2;
+        this.centerX = 0;
+        this.centerY = 0;
+        this.width = 0;
+        this.height = 0;
     }
 
-    @Override
-    public int getX()
+    public Neighborhood(int centerX, int centerY, int width, int height)
     {
-        return (left + right) / 2;
-    }
-
-    @Override
-    public int getY()
-    {
-        return (top + bottom) / 2;
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
@@ -39,8 +35,49 @@ public class Neighborhood implements Shape
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setColor(COLOR);
-        graphics2D.fillRect(left, top, right - left, bottom - top);
+        graphics2D.fillRect(centerX - width / 2, centerY - height / 2,
+                centerX + width / 2, centerY + height / 2);
 
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, previousAntialiasingState);
+    }
+
+    public int getCenterX()
+    {
+        return centerX;
+    }
+
+    public void setCenterX(int centerX)
+    {
+        this.centerX = centerX;
+    }
+
+    public int getCenterY()
+    {
+        return centerY;
+    }
+
+    public void setCenterY(int centerY)
+    {
+        this.centerY = centerY;
+    }
+
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+
+    public int getHeight()
+    {
+        return height;
+    }
+
+    public void setHeight(int height)
+    {
+        this.height = height;
     }
 }

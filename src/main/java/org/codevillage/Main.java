@@ -19,10 +19,10 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         List<Neighborhood> neighborhoods = new ArrayList<>(List.of(new Neighborhood[]{
-                new Neighborhood(200, 200, 300, 300),
-                new Neighborhood(250, 250, 350, 350),
-                new Neighborhood(300, 300, 400, 400),
-                new Neighborhood(0, 0, 200, 200),
+                new Neighborhood(250, 250, 100, 100),
+                new Neighborhood(300, 300, 100, 100),
+                new Neighborhood(350, 350, 100, 100),
+                new Neighborhood(100, 100, 100, 100),
         }));
 
         int N = 10;
@@ -31,7 +31,7 @@ public class Main {
             double angle = 2 * Math.PI * i / N;
             int x = (int)(250 + 150 * Math.cos(angle));
             int y = (int)(250 + 150 * Math.sin(angle));
-            neighborhoods.add(new Neighborhood(x - 20, y - 20, x + 20, y + 20));
+            neighborhoods.add(new Neighborhood(x, y, 40, 40));
         }
 
 
