@@ -8,14 +8,14 @@ public class CanvasData extends PropertyChangeSupport {
     private static CanvasData instance;
     private List<Shape> shapes;
 
-    private CanvasData(Object sourceBean) {
-        super(sourceBean);
+    private CanvasData() {
+        super(new Object());
         this.shapes = new ArrayList<Shape>();
     }
 
-    public static CanvasData getInstance(Object sourceBean) {
+    public static CanvasData getInstance() {
         if (instance == null) {
-            instance = new CanvasData(sourceBean);
+            instance = new CanvasData();
         }
         return instance;
     }

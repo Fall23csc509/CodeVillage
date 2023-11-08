@@ -2,7 +2,7 @@ package org.codevillage;
 
 public class Main {
     public static void main(String[] args) {
-        CanvasData canvasData = CanvasData.getInstance(new Object());
+        CanvasData canvasData = CanvasData.getInstance();
         Canvas canvas = new Canvas(); // To be implemented
         canvasData.addPropertyChangeListener(canvas);
 
