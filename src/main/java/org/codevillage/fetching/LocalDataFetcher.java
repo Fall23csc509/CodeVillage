@@ -1,10 +1,13 @@
 package org.codevillage.fetching;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 
+@Log4j2
 public class LocalDataFetcher implements DataFetcher {
     @Override
     public void downloadPackage(String url, String targetPath) {
@@ -26,7 +29,7 @@ public class LocalDataFetcher implements DataFetcher {
 
             // Copy the source directory and its contents to the target directory
             Path finalTargetDirectory = targetDirectory;
-            Files.walkFileTree(sourceDirectory, new SimpleFileVisitor<Path>() {
+            Files.walkFileTree(sourceDirectory, new SimpleFileVisitor<>() {
                 @Override
                 public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
                     Path targetDir = finalTargetDirectory.resolve(sourceDirectory.relativize(dir));
@@ -42,7 +45,7 @@ public class LocalDataFetcher implements DataFetcher {
             });
         } catch (IOException e) {
             // Handle any exceptions that may occur during the copy process
-            e.printStackTrace();
+            log.error("An error occurred while copying the file: ", e);
         }
     }
 }
