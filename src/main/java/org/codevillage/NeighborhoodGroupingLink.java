@@ -23,6 +23,9 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
         // parent
         dissolveExtras(nw);
         ShapePositioningData.getInstance().setNeighborhoodWrapper(nw);
+        if (next != null) {
+            next.position(entities);
+        }
     }
     private void dissolveExtras(NeighborhoodWrapper neighborhoodWrapper) {
         ArrayList<NeighborhoodWrapper> neighborhoodWrappers = neighborhoodWrapper.getNeighborhoods();

@@ -8,11 +8,38 @@ public class NeighborhoodWrapper {
     ArrayList<JavaEntity> entities;
     ArrayList<NeighborhoodWrapper> neighborhoods;
     ArrayList<String> compositions;
+    ArrayList<Shape> shapes;
+    int entityYBound;
+    Neighborhood neighborhoodShape;
     public NeighborhoodWrapper() {
         this.entities = new ArrayList<>();
         this.neighborhoods = new ArrayList<>();
         this.compositions = new ArrayList<>();
+        this.shapes = new ArrayList<>();
     }
+
+    public int getEntityYBound() {
+        return entityYBound;
+    }
+
+    public Neighborhood getNeighborhoodShape() {
+        return neighborhoodshape;
+    }
+    public void setNeighborhoodShape(Neighborhood neighborhoodShape) {
+        this.neighborhoodShape = neighborhoodShape;
+    }
+
+    public void setEntityYBound(int entityYBound) {
+        this.entityYBound = entityYBound;
+    }
+
+    public ArrayList<Shape> getShapes() {
+        return shapes;
+    }
+    public void addAllShapes(ArrayList<Shape> shapes) {
+        this.shapes.addAll(shapes);
+    }
+
     public void addEntity(JavaEntity e) {
         this.entities.add(e);
     }
