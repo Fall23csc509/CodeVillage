@@ -1,12 +1,21 @@
 package org.codevillage;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class JavaEntityBuilder implements EntityBuilder{
-    String name, fullyQualifiedName, parent;
-    ArrayList<String> dependencies, compositions, realizations;
+    String name, fullyQualifiedName;
+    Optional<String> parent;
+    ArrayList<String> dependencies, compositions, realizations, associations;
     JavaEntityType type;
     int linesOfCode;
+    public JavaEntityBuilder() {
+        dependencies = new ArrayList<>();
+        compositions = new ArrayList<>();
+        realizations = new ArrayList<>();
+        associations = new ArrayList<>();
+        parent = Optional.empty();
+    }
     @Override
     public JavaEntity build() {
         if (this.type == JavaEntityType.JAVA_INTERFACE) {
@@ -55,9 +64,11 @@ public class JavaEntityBuilder implements EntityBuilder{
         this.realizations.add(s);
     }
 
+    public void addAssociation(String s) {this.associations.add(s); }
+
     @Override
     public void parent(String s) {
-        this.parent = s;
+        this.parent = Optional.of(s);
     }
 
     @Override
