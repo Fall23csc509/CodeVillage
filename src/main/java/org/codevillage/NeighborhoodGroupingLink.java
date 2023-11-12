@@ -24,7 +24,7 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
         dissolveExtras(nw);
         ShapePositioningData.getInstance().setNeighborhoodWrapper(nw);
     }
-    void dissolveExtras(NeighborhoodWrapper neighborhoodWrapper) {
+    private void dissolveExtras(NeighborhoodWrapper neighborhoodWrapper) {
         ArrayList<NeighborhoodWrapper> neighborhoodWrappers = neighborhoodWrapper.getNeighborhoods();
         Iterator<NeighborhoodWrapper> neighborhoodWrapperIterator = neighborhoodWrappers.stream().iterator();
         while (neighborhoodWrapperIterator.hasNext()) {
@@ -45,7 +45,7 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
             }
         }
     }
-    void replaceComposers(NeighborhoodWrapper neighborhoodWrapper, ArrayList<JavaEntity> composers) {
+    private void replaceComposers(NeighborhoodWrapper neighborhoodWrapper, ArrayList<JavaEntity> composers) {
         for (JavaEntity composer : composers) {
             ArrayList<NeighborhoodWrapper> neighborhoodWrappers = new ArrayList<>(neighborhoodWrapper.getNeighborhoods());
             while (!neighborhoodWrappers.isEmpty()) {

@@ -89,4 +89,14 @@ class NeighborhoodGroupingLinkTest {
         assertEquals("{[] K {[A] H F A X {[B] Y L W B {[C D] Z C}}} {[D] J D}}",
                 ShapePositioningData.getInstance().getNeighborhoodWrapper().toString());
     }
+    @Test
+    public void neighborhoodGroupingTest3() {
+        ArrayList<JavaEntity> entities = new ArrayList<>();
+        JavaInterface javaInterface = new JavaInterface();
+        entities.add(javaInterface);
+        NeighborhoodGroupingLink link = new NeighborhoodGroupingLink(null);
+        link.position(entities);
+        assertEquals("{[]}",
+                ShapePositioningData.getInstance().getNeighborhoodWrapper().toString());
+    }
 }
