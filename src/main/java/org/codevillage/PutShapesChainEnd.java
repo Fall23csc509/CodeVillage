@@ -1,10 +1,12 @@
 package org.codevillage;
 
+import java.util.List;
+
 public class PutShapesChainEnd extends ShapeChainEnd{
     @Override
     public void construct() {
-        CanvasData canvasData = CanvasData.getInstance().getShapes();
-        ShapePositioningData shapePositioningData = ShapePositioningData.getInstance().getShapes();
+        List<Shape> canvasData = CanvasData.getInstance().getShapes();
+        List<Shape> shapePositioningData = ShapePositioningData.getInstance().getShapes();
         canvasData.addAll(shapePositioningData);
     }
 
