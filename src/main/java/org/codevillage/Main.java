@@ -22,4 +22,3 @@ public class Main extends JFrame {
         System.out.println("Hello world!");
 
     }
-}
