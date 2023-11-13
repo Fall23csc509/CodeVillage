@@ -23,7 +23,7 @@ public class NeighborhoodWrapper {
     }
 
     public Neighborhood getNeighborhoodShape() {
-        return neighborhoodshape;
+        return neighborhoodShape;
     }
     public void setNeighborhoodShape(Neighborhood neighborhoodShape) {
         this.neighborhoodShape = neighborhoodShape;
