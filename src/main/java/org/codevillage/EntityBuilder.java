@@ -10,4 +10,5 @@ public interface EntityBuilder {
     void addRealization(String s);
     void parent(String s);
     void linesOfCode(int i);
+    void addAssociation(String s);
 }
