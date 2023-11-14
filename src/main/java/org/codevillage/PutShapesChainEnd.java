@@ -1,14 +1,14 @@
 package org.codevillage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PutShapesChainEnd extends ShapeChainEnd {
 
     @Override
-    public void position() {
-
-
+    public void position(ArrayList<JavaEntity> entities) {
         CanvasData canvasData = CanvasData.getInstance();
+
         NeighborhoodWrapper topLevelNeighborhoodWrapper = ShapePositioningData
                 .getInstance()
                 .getNeighborhoodWrapper();
@@ -17,19 +17,19 @@ public class PutShapesChainEnd extends ShapeChainEnd {
         canvasData.addAll(topLevelNeighborhoodWrapper.getShapes());
 
         // Add each neighborhood and its shapes
-        processNeighborhoods(topLevelNeighborhoodWrapper.getNeighborhoods());
+        processNeighborhoods(topLevelNeighborhoodWrapper.getNeighborhoods(), canvasData);
     }
 
-    private void processNeighborhoods(List<NeighborhoodWrapper> neighborhoodWrapperList) {
+    private void processNeighborhoods(List<NeighborhoodWrapper> neighborhoodWrapperList, CanvasData canvasData) {
         for (NeighborhoodWrapper neighborhoodWrapper : neighborhoodWrapperList) {
             // Add neighborhood boundary and its shapes
             canvasData.add(neighborhoodWrapper.getNeighborhoodShape());
             canvasData.addAll(neighborhoodWrapper.getShapes());
 
             // Check if it has neighborhoods remaining
-            if (neighborhoodWrapper.getNeighborhoods()) {
+            if (!neighborhoodWrapper.getNeighborhoods().isEmpty()) {
                 // Process the remaining neighborhoods
-                processNeighborhoods(neighborhoodWrapper.getNeighborhoods());
+                processNeighborhoods(neighborhoodWrapper.getNeighborhoods(), canvasData);
             }
         }
     }
