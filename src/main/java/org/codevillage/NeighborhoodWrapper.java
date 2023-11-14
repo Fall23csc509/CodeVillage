@@ -63,7 +63,8 @@ public class NeighborhoodWrapper {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NeighborhoodWrapper that)) return false;
+        if (!(o instanceof NeighborhoodWrapper)) return false;
+        NeighborhoodWrapper that = (NeighborhoodWrapper) o;
         return Objects.equals(entities, that.entities) && Objects.equals(neighborhoods, that.neighborhoods);
     }
 
