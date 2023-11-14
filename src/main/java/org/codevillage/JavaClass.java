@@ -28,6 +28,9 @@ public abstract class JavaClass implements JavaEntity {
     public ArrayList<String> getDependencies() {
         return dependencies;
     }
+    public ArrayList<String> getCompositions() {
+        return compositions;
+    }
     public ArrayList<String> getRealizations() {
         return realizations;
     }
