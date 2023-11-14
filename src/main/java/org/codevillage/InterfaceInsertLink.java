@@ -19,7 +19,7 @@ public class InterfaceInsertLink extends ShapeChainLink {
                 while (!nhQueue.isEmpty()) {
                     nhCurr = nhQueue.remove(0);
                     int counter = 0;
-                    for (JavaEntity otherEntity : entities) {
+                    for (JavaEntity otherEntity : nhCurr.getEntities()) {
                         if (otherEntity.getType() == JavaEntityType.JAVA_BASE_CLASS ||
                                 otherEntity.getType() == JavaEntityType.JAVA_ABSTRACT_CLASS) {
                             JavaClass otherJavaClass = (JavaClass) otherEntity;
@@ -37,6 +37,8 @@ public class InterfaceInsertLink extends ShapeChainLink {
                 mostRealizationsWrapper.addEntity(entity);
             }
         }
-        this.next.position(entities);
+        if (this.next != null){
+            this.next.position(entities);
+        }
     }
 }
