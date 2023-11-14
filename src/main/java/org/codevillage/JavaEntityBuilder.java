@@ -19,15 +19,15 @@ public class JavaEntityBuilder implements EntityBuilder{
     @Override
     public JavaEntity build() {
         if (this.type == JavaEntityType.JAVA_INTERFACE) {
-            return new JavaInterface(name, fullyQualifiedName, linesOfCode, type);
+            return new JavaInterface(name, fullyQualifiedName, linesOfCode, dependencies);
         }
         else if (this.type == JavaEntityType.JAVA_BASE_CLASS) {
-            return new JavaBaseClass(name, fullyQualifiedName, linesOfCode, type, dependencies,
-                    realizations, compositions, parent);
+            return new JavaBaseClass(name, fullyQualifiedName, linesOfCode, dependencies,
+                    realizations, compositions, associations, parent);
         }
         else if (this.type == JavaEntityType.JAVA_ABSTRACT_CLASS) {
-            return new JavaAbstractClass(name, fullyQualifiedName, linesOfCode, type, dependencies,
-                    realizations, compositions, parent);
+            return new JavaAbstractClass(name, fullyQualifiedName, linesOfCode, dependencies,
+                    realizations, compositions, associations, parent);
         }
         else {
             return null;
@@ -63,7 +63,7 @@ public class JavaEntityBuilder implements EntityBuilder{
     public void addRealization(String s) {
         this.realizations.add(s);
     }
-
+    @Override
     public void addAssociation(String s) {this.associations.add(s); }
 
     @Override
