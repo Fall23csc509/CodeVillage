@@ -10,19 +10,27 @@ class NeighborhoodGroupingLinkTest {
     @Test
     public void neighborhoodGroupingTest1() {
         ArrayList<JavaEntity> entities = new ArrayList<>();
-        JavaAbstractClass a = new JavaAbstractClass("A");
+        JavaAbstractClass a = new JavaAbstractClass("A", "A", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(a);
-        JavaAbstractClass b = new JavaAbstractClass("B");
-        b.addComposition("A");
+        ArrayList<String> bCompositions = new ArrayList<>();
+        bCompositions.add("A");
+        JavaAbstractClass b = new JavaAbstractClass("B", "B", 0, new ArrayList<>(),
+                new ArrayList<>(), bCompositions, new ArrayList<>(), null);
         entities.add(b);
-        JavaBaseClass x = new JavaBaseClass("x");
+        JavaBaseClass x = new JavaBaseClass("x", "x", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(x);
-        JavaBaseClass y = new JavaBaseClass("y");
-        y.addComposition("A");
+        ArrayList<String> yCompositions = new ArrayList<>();
+        yCompositions.add("A");
+        JavaBaseClass y = new JavaBaseClass("y", "y", 0, new ArrayList<>(),
+                new ArrayList<>(), yCompositions, new ArrayList<>(), null);
         entities.add(y);
-        JavaBaseClass z = new JavaBaseClass("z");
-        z.addComposition("A");
-        z.addComposition("B");
+        ArrayList<String> zCompositions = new ArrayList<>();
+        zCompositions.add("A");
+        zCompositions.add("B");
+        JavaBaseClass z = new JavaBaseClass("z", "z", 0, new ArrayList<>(),
+                new ArrayList<>(), zCompositions, new ArrayList<>(), null);
         entities.add(z);
         NeighborhoodWrapper testNeighborhood = new NeighborhoodWrapper();
         testNeighborhood.addEntity(x);
@@ -42,46 +50,67 @@ class NeighborhoodGroupingLinkTest {
     @Test
     public void neighborhoodGroupingTest2() {
         ArrayList<JavaEntity> entities = new ArrayList<>();
-        JavaAbstractClass a = new JavaAbstractClass("A");
+        JavaAbstractClass a = new JavaAbstractClass("A", "A", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(a);
-        JavaAbstractClass b = new JavaAbstractClass("B");
+        JavaAbstractClass b = new JavaAbstractClass("B", "B", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(b);
-        JavaAbstractClass c = new JavaAbstractClass("C");
+        JavaAbstractClass c = new JavaAbstractClass("C", "C", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(c);
-        JavaAbstractClass d = new JavaAbstractClass("D");
+        JavaAbstractClass d = new JavaAbstractClass("D", "D", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(d);
-        JavaBaseClass x = new JavaBaseClass("X");
-        x.addComposition("A");
-        x.addComposition("D");
+        ArrayList<String> xCompositions = new ArrayList<>();
+        xCompositions.add("A");
+        xCompositions.add("D");
+        JavaBaseClass x = new JavaBaseClass("X", "X", 0, new ArrayList<>(),
+                new ArrayList<>(), xCompositions, new ArrayList<>(), null);
         entities.add(x);
-        JavaBaseClass h = new JavaBaseClass("H");
-        h.addComposition("A");
+        ArrayList<String> hCompositions = new ArrayList<>();
+        hCompositions.add("A");
+        JavaBaseClass h = new JavaBaseClass("H", "H", 0, new ArrayList<>(),
+                new ArrayList<>(), hCompositions, new ArrayList<>(), null);
         entities.add(h);
-        JavaBaseClass f = new JavaBaseClass("F");
-        f.addComposition("A");
+        ArrayList<String> fCompositions = new ArrayList<>();
+        fCompositions.add("A");
+        JavaBaseClass f = new JavaBaseClass("F", "F", 0, new ArrayList<>(),
+                new ArrayList<>(), fCompositions, new ArrayList<>(), null);
         entities.add(f);
-        JavaBaseClass y = new JavaBaseClass("Y");
-        y.addComposition("A");
-        y.addComposition("B");
+        ArrayList<String> yCompositions = new ArrayList<>();
+        yCompositions.add("A");
+        yCompositions.add("B");
+        JavaBaseClass y = new JavaBaseClass("Y", "Y", 0, new ArrayList<>(),
+                new ArrayList<>(), yCompositions, new ArrayList<>(), null);
         entities.add(y);
-        JavaBaseClass l = new JavaBaseClass("L");
-        l.addComposition("A");
-        l.addComposition("B");
+        ArrayList<String> lCompositions = new ArrayList<>();
+        lCompositions.add("A");
+        lCompositions.add("B");
+        JavaBaseClass l = new JavaBaseClass("L", "L", 0, new ArrayList<>(),
+                new ArrayList<>(), lCompositions, new ArrayList<>(), null);
         entities.add(l);
-        JavaBaseClass w = new JavaBaseClass("W");
-        w.addComposition("A");
-        w.addComposition("B");
+        ArrayList<String> wCompositions = new ArrayList<>();
+        wCompositions.add("A");
+        wCompositions.add("B");
+        JavaBaseClass w = new JavaBaseClass("W", "W", 0, new ArrayList<>(),
+                new ArrayList<>(), wCompositions, new ArrayList<>(), null);
         entities.add(w);
-        JavaBaseClass z = new JavaBaseClass("Z");
-        z.addComposition("A");
-        z.addComposition("B");
-        z.addComposition("C");
-        z.addComposition("D");
+        ArrayList<String> zCompositions = new ArrayList<>();
+        zCompositions.add("A");
+        zCompositions.add("B");
+        zCompositions.add("C");
+        zCompositions.add("D");
+        JavaBaseClass z = new JavaBaseClass("Z", "Z", 0, new ArrayList<>(),
+                new ArrayList<>(), zCompositions, new ArrayList<>(), null);
         entities.add(z);
-        JavaBaseClass j = new JavaBaseClass("J");
-        j.addComposition("D");
+        ArrayList<String> jCompositions = new ArrayList<>();
+        jCompositions.add("D");
+        JavaBaseClass j = new JavaBaseClass("J", "J", 0, new ArrayList<>(),
+                new ArrayList<>(), jCompositions, new ArrayList<>(), null);
         entities.add(j);
-        JavaBaseClass k = new JavaBaseClass("K");
+        JavaBaseClass k = new JavaBaseClass("K", "K", 0, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), null);
         entities.add(k);
         NeighborhoodGroupingLink link = new NeighborhoodGroupingLink(null);
         link.position(entities);
@@ -92,7 +121,7 @@ class NeighborhoodGroupingLinkTest {
     @Test
     public void neighborhoodGroupingTest3() {
         ArrayList<JavaEntity> entities = new ArrayList<>();
-        JavaInterface javaInterface = new JavaInterface();
+        JavaInterface javaInterface = new JavaInterface("javaInterface", "javaInterface", 0, new ArrayList<>());
         entities.add(javaInterface);
         NeighborhoodGroupingLink link = new NeighborhoodGroupingLink(null);
         link.position(entities);
