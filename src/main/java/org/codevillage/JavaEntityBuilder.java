@@ -22,8 +22,8 @@ public class JavaEntityBuilder implements EntityBuilder{
             return new JavaInterface(name, fullyQualifiedName, linesOfCode, type);
         }
         else if (this.type == JavaEntityType.JAVA_BASE_CLASS) {
-            return new JavaBaseClass(name, fullyQualifiedName, linesOfCode, type, dependencies,
-                    realizations, compositions, parent);
+            return new JavaBaseClass(name, fullyQualifiedName, linesOfCode, dependencies,
+                    realizations, compositions, associations, parent);
         }
         else if (this.type == JavaEntityType.JAVA_ABSTRACT_CLASS) {
             return new JavaAbstractClass(name, fullyQualifiedName, linesOfCode, type, dependencies,
