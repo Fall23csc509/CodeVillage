@@ -21,6 +21,5 @@ public class Main extends JFrame {
         frame.add(canvas);
 
         System.out.println("Hello world!");
-
     }
 }
