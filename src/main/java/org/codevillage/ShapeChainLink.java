@@ -1,10 +1,9 @@
 package org.codevillage;
 
-public class ShapeChainLink implements ShapeChain{
-    protected ShapeChain next;
+public abstract class ShapeChainLink implements ShapeChain {
+    ShapeChain next;
 
-    @Override
-    public void construct() {
-
+    public ShapeChainLink(ShapeChain next) {
+        this.next = next;
     }
 }

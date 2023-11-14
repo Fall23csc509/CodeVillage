@@ -5,7 +5,7 @@ import java.util.List;
 public class PutShapesChainEnd extends ShapeChainEnd {
 
     @Override
-    public void construct() {
+    public void position() {
 
 
         CanvasData canvasData = CanvasData.getInstance();

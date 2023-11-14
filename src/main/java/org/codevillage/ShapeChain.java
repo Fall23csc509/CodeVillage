@@ -1,5 +1,7 @@
 package org.codevillage;
 
+import java.util.ArrayList;
+
 public interface ShapeChain {
-    void construct();
+    void position(ArrayList<JavaEntity> entities);
 }
