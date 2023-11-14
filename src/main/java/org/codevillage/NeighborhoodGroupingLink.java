@@ -1,6 +1,7 @@
 package org.codevillage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class NeighborhoodGroupingLink extends ShapeChainLink{
     public NeighborhoodGroupingLink(ShapeChain next) {
@@ -12,7 +13,7 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
         NeighborhoodWrapper nw = groupClasses(filtered);
         // for each name in the global singleton hashset, pop the javaentity out of nw and save it to a list.
         HashSet<String> composerNames = ShapePositioningData.getInstance().getComposerNames();
-        ArrayList<String> composerList = new ArrayList<>(composerNames.stream().toList());
+        ArrayList<String> composerList = new ArrayList<>(composerNames);
         // getComposers removes all the composers from nw and returns them
         ArrayList<JavaEntity> composers = getComposers(nw, composerList);
         // then for each javaentity in the list, determine the highest level occurence of it in a neighborhood's
@@ -108,10 +109,10 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
     private NeighborhoodWrapper groupClasses(ArrayList<JavaClass> classes) {
         NeighborhoodWrapper neighborhoodWrapper = new NeighborhoodWrapper();
         // make this stream array list
-        ArrayList<JavaClass> topLevelMembers = new ArrayList<>(classes.stream().filter(c -> c.getCompositions().isEmpty()).toList());
+        ArrayList<JavaClass> topLevelMembers = new ArrayList<>(classes.stream().filter(c -> c.getCompositions().isEmpty()).collect(Collectors.toList()));
         // add everything from topLevelMembers to neighborhoodWrapper
         // then filter out the others
-        ArrayList<JavaClass> subNeighborhoodMembers = new ArrayList<>(classes.stream().filter(c -> !c.getCompositions().isEmpty()).toList());
+        ArrayList<JavaClass> subNeighborhoodMembers = new ArrayList<>(classes.stream().filter(c -> !c.getCompositions().isEmpty()).collect(Collectors.toList()));
         for (JavaClass topLevelMember : topLevelMembers) {
             neighborhoodWrapper.addEntity(topLevelMember);
         }

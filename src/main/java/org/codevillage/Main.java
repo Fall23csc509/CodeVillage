@@ -5,11 +5,12 @@ import java.awt.*;
 
 public class Main extends JFrame {
 
-    public Main(){
+    public Main() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
         setVisible(true);
     }
+
     public static void main(String[] args) {
         CanvasData canvasData = CanvasData.getInstance();
         Canvas canvas = new Canvas();
@@ -22,3 +23,4 @@ public class Main extends JFrame {
         System.out.println("Hello world!");
 
     }
+}
