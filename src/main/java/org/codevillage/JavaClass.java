@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public abstract class JavaClass implements JavaEntity {
     String fullyQualifiedName, name;
-    @Getter
     ArrayList<String> dependencies, realizations, compositions, associations;
     Optional<String> parent;
     int linesOfCode;
