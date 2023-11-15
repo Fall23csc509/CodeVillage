@@ -3,6 +3,9 @@ package org.codevillage;
 import java.io.File;
 
 public class SourceFileChecker implements FileChecker{
+    public SourceFileChecker(){
+        
+    }
 
     @Override
     public File[] getFilesToParse(File directory) {
