@@ -15,6 +15,7 @@ public class ShapesRelativePositioningLink extends ShapeChainLink
         ShapePositioningData shapePositioningData = ShapePositioningData.getInstance();
         NeighborhoodWrapper wrapper = shapePositioningData.getNeighborhoodWrapper();
         positionEntitiesInNeighborhoods(wrapper);
+        next.position(ignored);
     }
 
     public static void positionEntitiesInNeighborhoods(NeighborhoodWrapper wrapper)
