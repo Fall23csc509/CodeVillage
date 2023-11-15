@@ -14,12 +14,17 @@ public class JavaEntityFactory implements EntityFactory{
     @Override
     public JavaEntity createEntityFromFile(File filename) throws IOException {
         /* type -> name -> association -> dependency -> LOC -> inheritance -> 
-        realization -> composition */
-        EntityParsingChain p = new CompositionParsingStep(new RealizationParsingStep(
-            new InheritanceParsingStep(new LOCParsingStep(new DependencyParsingStep(
-                new AssociationParsingStep(new NameParsingStep(
-                    new TypeParsingStep(new EntityParsingFinish()))))))));
-
+        realization -> composition -> build */
+        EntityParsingChain p = new TypeParsingStep(
+            new NameParsingStep(
+                new AssociationParsingStep(
+                    new DependencyParsingStep(
+                        new LOCParsingStep(
+                            new InheritanceParsingStep(
+                                new RealizationParsingStep(
+                                    new CompositionParsingStep(
+                                        new BuildParsingFinish()))))))));
+        
         String fileContent = Files.readString(Paths.get(filename.toURI()));
         CompilationUnit compilationUnit = StaticJavaParser.parse(fileContent);
 
