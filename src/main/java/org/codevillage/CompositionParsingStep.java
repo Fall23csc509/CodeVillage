@@ -11,8 +11,7 @@ public class CompositionParsingStep extends EntityParsingStep {
 
     public CompositionParsingStep(EntityParsingChain next) {
         super(next);
-    }
-
+      
     @Override
     public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
         // Parse the CompilationUnit to find composition relationships

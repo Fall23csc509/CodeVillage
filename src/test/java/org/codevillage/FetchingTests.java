@@ -1,13 +1,12 @@
 package org.codevillage;
 
-import org.codevillage.Utils;
+//import org.codevillage.Utils;
 import org.codevillage.fetching.GithubDataFetcher;
 import org.codevillage.fetching.LocalDataFetcher;
 import org.codevillage.fetching.SVNDataFetcher;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -23,12 +22,12 @@ public class FetchingTests {
         final File tempFolder = new File(targetPath);
         assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
         // delete dir temp
-        try {
-            Utils.deleteDirectory(tempFolder.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error deleting directory");
-        }
+//        try {
+////            Utils.deleteDirectory(tempFolder.toPath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("Error deleting directory");
+//        }
         assert(!tempFolder.exists());
     }
     @Test
@@ -41,12 +40,12 @@ public class FetchingTests {
         final File tempFolder = new File(targetPath);
         assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
         // delete dir temp
-        try {
-            Utils.deleteDirectory(tempFolder.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error deleting directory");
-        }
+//        try {
+////            Utils.deleteDirectory(tempFolder.toPath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("Error deleting directory");
+//        }
         assert(!tempFolder.exists());
     }
     @Test
@@ -64,12 +63,12 @@ public class FetchingTests {
         assert (Objects.requireNonNull(tempFolder.listFiles()).length > 0);
 
         // Delete the temp directory
-        try {
-            Utils.deleteDirectory(tempFolder.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error deleting directory");
-        }
+//        try {
+////            Utils.deleteDirectory(tempFolder.toPath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("Error deleting directory");
+//        }
         assert (!tempFolder.exists());
     }
 }
