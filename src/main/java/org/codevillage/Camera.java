@@ -4,11 +4,11 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeSupport;
 
 public class Camera {
+    private static final Camera instance = new Camera();
     private int cameraX;
     private int cameraY;
-    private KeyListener keyListener;
-    private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    private static Camera instance = new Camera();
+    private final KeyListener keyListener;
+    private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
     private Camera() {
         cameraX = 0;
@@ -24,19 +24,21 @@ public class Camera {
         return cameraX;
     }
 
-    public int getCameraY() {
-        return cameraY;
-    }
-
     public void setCameraX(int cameraX) {
         int oldX = this.cameraX;
         this.cameraX = cameraX;
+        CanvasDataUpdater.update();
         propertyChangeSupport.firePropertyChange("cameraX", oldX, cameraX);
+    }
+
+    public int getCameraY() {
+        return cameraY;
     }
 
     public void setCameraY(int cameraY) {
         int oldY = this.cameraY;
         this.cameraY = cameraY;
+        CanvasDataUpdater.update();
         propertyChangeSupport.firePropertyChange("cameraY", oldY, cameraY);
     }
 
