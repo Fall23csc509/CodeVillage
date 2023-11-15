@@ -12,10 +12,17 @@ public class JavaEntityFactory implements EntityFactory{
 
     @Override
     public JavaEntity createEntityFromFile(File filename) throws IOException {
-        TypeParsingStep type = new TypeParsingStep(null);
+        /* type -> name -> association -> dependency -> LOC -> inheritance -> 
+        realization -> composition */
+        EntityParsingChain p = new CompositionParsingStep(new RealizationParsingStep(
+            new InheritanceParsingStep(new LOCParsingStep(new DependencyParsingStep(
+                new AssociationParsingStep(new NameParsingStep(
+                    new TypeParsingStep(null))))))));
+
         String fileContent = Files.readString(Paths.get(filename.toURI()));
         CompilationUnit compilationUnit = StaticJavaParser.parse(fileContent);
-        JavaEntity entity = type.construct(new JavaEntityBuilder(), compilationUnit);
+
+        JavaEntity entity = p.construct(new JavaEntityBuilder(), compilationUnit);
         return entity;
     }
 }
