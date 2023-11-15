@@ -2,11 +2,12 @@ package org.codevillage;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.utils.SourceRoot;
+
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 
 public class TypeParsingStep extends EntityParsingStep {
@@ -17,23 +18,25 @@ public class TypeParsingStep extends EntityParsingStep {
 
     @Override
     public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
-        List<TypeDeclaration<?>> types = declaration.getTypes();
+        Optional<ClassOrInterfaceDeclaration> classOrInterface = findFirstClassOrInterface(declaration);
 
-        if (!types.isEmpty()) {
-            TypeDeclaration<?> typeDeclaration = types.get(0); // assuming there's only one type in the file
-
+        if (classOrInterface.isPresent()) {
             // Determine type of Java entity
-            JavaEntityType entityType = determineJavaEntityType(typeDeclaration);
+            JavaEntityType entityType = determineJavaEntityType(classOrInterface.get());
             builder.type(entityType);
 
             // Continue with the next step in the parsing chain
             return next != null ? next.construct(builder, declaration) : builder.build();
         }
 
-        return null;
+        return null; // No relevant type declaration found
     }
 
-    private JavaEntityType determineJavaEntityType(TypeDeclaration<?> typeDeclaration) {
+    private Optional<ClassOrInterfaceDeclaration> findFirstClassOrInterface(CompilationUnit declaration) {
+        return declaration.findFirst(ClassOrInterfaceDeclaration.class);
+    }
+
+    private JavaEntityType determineJavaEntityType(ClassOrInterfaceDeclaration typeDeclaration) {
         if (typeDeclaration.isInterface()) {
             return JavaEntityType.JAVA_INTERFACE;
         } else if (typeDeclaration.isAbstract()) {
@@ -47,8 +50,8 @@ public class TypeParsingStep extends EntityParsingStep {
         String filePath = "TestJavaFile.java"; // file path
         try {
             Path path = Path.of(filePath);
-            SourceRoot sourceRoot = new SourceRoot(path);
-            CompilationUnit cu = sourceRoot.parse(path);
+            SourceRoot sourceRoot = new SourceRoot(path.getParent());
+            CompilationUnit cu = sourceRoot.parse("", path.getFileName().toString());
 
             EntityBuilder builder = new JavaEntityBuilder();
             JavaEntity entity = new TypeParsingStep(null).construct(builder, cu);
