@@ -1,7 +1,9 @@
 package org.codevillage;
 
 import com.github.javaparser.ast.CompilationUnit;
-import java.lang.reflect.Field;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,35 +15,32 @@ public class CompositionParsingStep extends EntityParsingStep {
 
     @Override
     public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
-        // Construct the entity using the builder
-        JavaEntity entity = builder.build();
-
-        // Get the compositions using reflection
-        List<String> compositions = getCompositionClassNames(entity);
-        for (String composition : compositions) {
-            builder.addComposition(composition);
-        }
+        // Parse the CompilationUnit to find composition relationships
+        CompositionVisitor visitor = new CompositionVisitor();
+        visitor.visit(declaration, builder);
 
         // Proceed with the next step in the chain, if any
         if (next != null) {
             return next.construct(builder, declaration);
+        } else {
+            return builder.build();
         }
-        return entity;
     }
 
-    private List<String> getCompositionClassNames(JavaEntity entity) {
-        List<String> classNames = new ArrayList<>();
-        Class<?> entityClass = entity.getClass();
-
-        Field[] fields = entityClass.getDeclaredFields();
-        for (Field field : fields) {
-            Class<?> fieldType = field.getType();
-            if (!fieldType.isPrimitive() && !fieldType.equals(String.class)) {
-                classNames.add(fieldType.getSimpleName());
-            }
+    private static class CompositionVisitor extends VoidVisitorAdapter<EntityBuilder> {
+        @Override
+        public void visit(ClassOrInterfaceDeclaration n, EntityBuilder builder) {
+            super.visit(n, builder);
+            n.getFields().forEach(field -> analyzeField(field, builder));
         }
 
-        return classNames;
+        private void analyzeField(FieldDeclaration field, EntityBuilder builder) {
+            field.getVariables().forEach(variable -> {
+                if (variable.getType().isClassOrInterfaceType()) {
+                    builder.addComposition(variable.getType().asString());
+                }
+            });
+        }
     }
 
     public static void main(String[] args) {
@@ -52,37 +51,16 @@ public class CompositionParsingStep extends EntityParsingStep {
         builder.type(JavaEntityType.JAVA_BASE_CLASS);
         builder.linesOfCode(100);
 
-        // Assume that CompilationUnit is not required for this example
-        CompilationUnit mockUnit = null;
+        // Sample CompilationUnit representing the Java source code
+        CompilationUnit mockUnit = new CompilationUnit();
+        // ... [Add mock code structure to mockUnit]
 
         // Using CompositionParsingStep
         CompositionParsingStep step = new CompositionParsingStep(null);
-        JavaEntity entity = new SampleEntity(); // Mock entity for demonstration
-        List<String> compositions = step.getCompositionClassNames(entity);
+        JavaEntity entity = step.construct(builder, mockUnit);
 
         // Print the result
         System.out.println("Entity Name: " + entity.getName());
-        System.out.println("Compositions: " + compositions);
+        System.out.println("Compositions: " + entity.getDependencies()); // Assuming compositions are added to dependencies for demonstration
     }
-}
-
-// Mock JavaEntity implementation for the demonstration
-class SampleEntity implements JavaEntity {
-    private String name;
-    private String fullyQualifiedName;
-    private ArrayList<String> dependencies;
-    private int linesOfCode;
-    private JavaEntityType type;
-    // Composition with another class
-    private Address address; // Example of a composed object
-
-    // Constructor and other methods as required
-    // Implementation of JavaEntity interface methods
-}
-
-// Example of a composed class
-class Address {
-    String street;
-    String city;
-    String state;
 }
