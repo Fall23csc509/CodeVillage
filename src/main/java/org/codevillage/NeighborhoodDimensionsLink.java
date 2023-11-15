@@ -23,14 +23,7 @@ public class NeighborhoodDimensionsLink extends ShapeChainLink {
 
     private void processNeighborhoods(NeighborhoodWrapper neighborhoodWrapper) {
         for (NeighborhoodWrapper subNeighborhoodWrapper : neighborhoodWrapper.getNeighborhoods()) {
-            if (!subNeighborhoodWrapper.getNeighborhoods().isEmpty()) {
-                processNeighborhoods(subNeighborhoodWrapper);
-            } else {
-                int height = calculateHeight(subNeighborhoodWrapper);
-                int width = calculateWidth(subNeighborhoodWrapper);
-                subNeighborhoodWrapper.getNeighborhoodShape().setHeight(height);
-                subNeighborhoodWrapper.getNeighborhoodShape().setWidth(width);
-            }
+            processNeighborhoods(subNeighborhoodWrapper);
         }
         int height = calculateHeight(neighborhoodWrapper);
         int width = calculateWidth(neighborhoodWrapper);

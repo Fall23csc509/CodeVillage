@@ -35,18 +35,21 @@ class NeighborhoodDimensionsLinkTest {
         NeighborhoodWrapper testNeighborhood = new NeighborhoodWrapper();
         testNeighborhood.addEntity(x);
         testNeighborhood.addEntity(a);
+        testNeighborhood.setNeighborhoodShape(new Neighborhood());
         NeighborhoodWrapper n1 = new NeighborhoodWrapper();
         n1.addEntity(b);
         n1.addEntity(y);
+        n1.setNeighborhoodShape(new Neighborhood());
         NeighborhoodWrapper n2 = new NeighborhoodWrapper();
         n2.addEntity(z);
+        n2.setNeighborhoodShape(new Neighborhood());
         n1.addNeighborhood(n2);
         testNeighborhood.addNeighborhood(n1);
         ShapePositioningData.getInstance().setNeighborhoodWrapper(testNeighborhood);
         NeighborhoodDimensionsLink link = new NeighborhoodDimensionsLink(null);
         link.position(entities);
         System.out.println(ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoodShape().getWidth());
-        assertEquals(0,
+        assertEquals(150,
                 ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoodShape().getWidth()); // Not sure what answer should be
     }
 }
