@@ -42,25 +42,4 @@ public class CompositionParsingStep extends EntityParsingStep {
             });
         }
     }
-
-    public static void main(String[] args) {
-        // Mock scenario for demonstration
-        JavaEntityBuilder builder = new JavaEntityBuilder();
-        builder.name("SampleEntity");
-        builder.fullyQualifiedName("org.codevillage.SampleEntity");
-        builder.type(JavaEntityType.JAVA_BASE_CLASS);
-        builder.linesOfCode(100);
-
-        // Sample CompilationUnit representing the Java source code
-        CompilationUnit mockUnit = new CompilationUnit();
-        // ... [Add mock code structure to mockUnit]
-
-        // Using CompositionParsingStep
-        CompositionParsingStep step = new CompositionParsingStep(null);
-        JavaEntity entity = step.construct(builder, mockUnit);
-
-        // Print the result
-        System.out.println("Entity Name: " + entity.getName());
-        System.out.println("Compositions: " + entity.getDependencies()); // Assuming compositions are added to dependencies for demonstration
-    }
 }
