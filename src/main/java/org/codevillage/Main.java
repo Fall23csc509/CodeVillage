@@ -11,7 +11,7 @@ import org.codevillage.fetching.*;
 public class Main extends JFrame {
     public static void main(String[] args) {
         Main window = new Main();
-        window.setSize(1200, 1200);
+        window.setSize(1000, 1000);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setTitle("509 Project 1");
@@ -53,32 +53,39 @@ public class Main extends JFrame {
 
         Canvas canvas = new Canvas();
         CanvasData data = CanvasData.getInstance();
-        // data.addObserver(canvas);
         canvas.setBackground(Color.BLUE);   // testing canvas is there
+
+        // implement camera
+        Camera cameraInstance = Camera.getInstance();
+        addKeyListener(cameraInstance.getKeyListener());
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(canvas, BorderLayout.CENTER);
         add(mainPanel);
 
         // logic
-        DataFetcher fetch;
+        final DataFetcher[] fetch = {null};
         dataTypeDropdown.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     String selectedDataType = (String) e.getItem();
                     if ("GitHub".equals(selectedDataType)) {
-                        fetch = new GithubDataFetcher();
-                        fetch.downloadPackage(linkTextField.getText(), targetPathTextField.getText());
+                        fetch[0] = new GithubDataFetcher();
+                        fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
                     } else if ("Subversion".equals(selectedDataType)) {
-                        fetch = new SVNDataFetcher();
-                        fetch.downloadPackage(linkTextField.getText(), targetPathTextField.getText());
+                        fetch[0] = new SVNDataFetcher();
+                        fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
                     } else {
-                        fetch = new LocalDataFetcher();
-                        fetch.downloadPackage(linkTextField.getText(), targetPathTextField.getText());
+                        fetch[0] = new LocalDataFetcher();
+                        fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
                     }
                 }
             }
         });
+
+        ShapeChain shapeChain = null;
+
+        // call SourceCodeParser here... not created yet?
     }
 }
