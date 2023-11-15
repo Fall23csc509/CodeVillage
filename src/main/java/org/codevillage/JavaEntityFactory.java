@@ -17,7 +17,7 @@ public class JavaEntityFactory implements EntityFactory{
         EntityParsingChain p = new CompositionParsingStep(new RealizationParsingStep(
             new InheritanceParsingStep(new LOCParsingStep(new DependencyParsingStep(
                 new AssociationParsingStep(new NameParsingStep(
-                    new TypeParsingStep(null))))))));
+                    new TypeParsingStep(new EntityParsingFinish()))))))));
 
         String fileContent = Files.readString(Paths.get(filename.toURI()));
         CompilationUnit compilationUnit = StaticJavaParser.parse(fileContent);
