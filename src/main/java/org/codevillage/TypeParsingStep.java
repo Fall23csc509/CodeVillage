@@ -11,9 +11,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 public class TypeParsingStep extends EntityParsingStep {
-
     public TypeParsingStep(EntityParsingChain next) {
         super(next);
+        //TODO Auto-generated constructor stub
     }
 
     @Override
@@ -43,26 +43,6 @@ public class TypeParsingStep extends EntityParsingStep {
             return JavaEntityType.JAVA_ABSTRACT_CLASS;
         } else {
             return JavaEntityType.JAVA_BASE_CLASS;
-        }
-    }
-
-    public static void main(String[] args) {
-        String filePath = "TestJavaFile.java"; // file path
-        try {
-            Path path = Path.of(filePath);
-            SourceRoot sourceRoot = new SourceRoot(path.getParent());
-            CompilationUnit cu = sourceRoot.parse("", path.getFileName().toString());
-
-            EntityBuilder builder = new JavaEntityBuilder();
-            JavaEntity entity = new TypeParsingStep(null).construct(builder, cu);
-
-            if (entity != null) {
-                System.out.println("Entity Type: " + entity.getType());
-            } else {
-                System.out.println("Failed to determine entity type.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
