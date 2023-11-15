@@ -28,8 +28,8 @@ public class NeighborhoodDimensionsLink extends ShapeChainLink {
             } else {
                 int height = calculateHeight(subNeighborhoodWrapper);
                 int width = calculateWidth(subNeighborhoodWrapper);
-                neighborhoodWrapper.getNeighborhoodShape().setHeight(height);
-                neighborhoodWrapper.getNeighborhoodShape().setWidth(width);
+                subNeighborhoodWrapper.getNeighborhoodShape().setHeight(height);
+                subNeighborhoodWrapper.getNeighborhoodShape().setWidth(width);
             }
         }
         int height = calculateHeight(neighborhoodWrapper);

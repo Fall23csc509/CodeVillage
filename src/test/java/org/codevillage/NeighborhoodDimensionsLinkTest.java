@@ -45,9 +45,8 @@ class NeighborhoodDimensionsLinkTest {
         ShapePositioningData.getInstance().setNeighborhoodWrapper(testNeighborhood);
         NeighborhoodDimensionsLink link = new NeighborhoodDimensionsLink(null);
         link.position(entities);
-        System.out.println(ShapePositioningData.getInstance().getNeighborhoodWrapper().getEntityYBound());
-        System.out.println(ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoods().toString());
+        System.out.println(ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoodShape().getWidth());
         assertEquals(0,
-                ShapePositioningData.getInstance().getNeighborhoodWrapper().getEntityYBound()); // Not sure what answer should be
+                ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoodShape().getWidth()); // Not sure what answer should be
     }
 }
