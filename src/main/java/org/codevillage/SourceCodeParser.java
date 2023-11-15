@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class SourceCodeParser implements Parser{
     ArrayList<JavaEntity> entities;
 
-    public SourceCodeParser(){};
+    public SourceCodeParser(){
+        this.entities = new ArrayList<>();
+    };
 
     @Override
     public void parseSourceFiles(File directory) {
