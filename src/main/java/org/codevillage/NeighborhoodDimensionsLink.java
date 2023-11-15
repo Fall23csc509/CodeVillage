@@ -1,6 +1,7 @@
 package org.codevillage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NeighborhoodDimensionsLink extends ShapeChainLink {
@@ -13,49 +14,74 @@ public class NeighborhoodDimensionsLink extends ShapeChainLink {
     @Override
     public void position(ArrayList<JavaEntity> entities) {
 
-        processNeighborhoods(ShapePositioningData.getInstance().getNeighborhoodWrapper().getNeighborhoods(),
-                CanvasData.getInstance());
+        processNeighborhoods(ShapePositioningData.getInstance().getNeighborhoodWrapper());
 
         if (next != null) {
             next.position(entities);
         }
     }
 
-    private int processNeighborhoods(List<NeighborhoodWrapper> neighborhoodWrapperList, CanvasData canvasData) {
-        int totalEntityYBoundSize = 10; // Variable to track the total size (start with 10px padding)
-
-        for (NeighborhoodWrapper neighborhoodWrapper : neighborhoodWrapperList) {
-            // Continue if more subneighborhoods exist
-            if (!neighborhoodWrapper.getNeighborhoods().isEmpty()) {
-                int subneighborhoodEntityYBoundSize = processNeighborhoods(neighborhoodWrapper.getNeighborhoods(), canvasData) + 10; // Size of all subneighborhoods
-                totalEntityYBoundSize += subneighborhoodEntityYBoundSize; // Keep track of the total size
+    private void processNeighborhoods(NeighborhoodWrapper neighborhoodWrapper) {
+        for (NeighborhoodWrapper subNeighborhoodWrapper : neighborhoodWrapper.getNeighborhoods()) {
+            if (!subNeighborhoodWrapper.getNeighborhoods().isEmpty()) {
+                processNeighborhoods(subNeighborhoodWrapper);
             } else {
-                // If no more subneighborhoods exist, use the remaining shapes as the size
-
-                // Create PointShape list from NeighborhoodWrapper shapes
-                List<PointShape> pointShapes = neighborhoodWrapper.getShapes().stream()
-                        .filter(shape -> shape instanceof PointShape)
-                        .map(shape -> (PointShape) shape)
-                        .toList();
-
-                int entityYBoundSize = calculateYHeight(pointShapes) + 10; // + 10px padding
-                totalEntityYBoundSize += entityYBoundSize; // Keep track of the total size
+                int height = calculateHeight(subNeighborhoodWrapper);
+                int width = calculateWidth(subNeighborhoodWrapper);
+                neighborhoodWrapper.getNeighborhoodShape().setHeight(height);
+                neighborhoodWrapper.getNeighborhoodShape().setWidth(width);
             }
-            neighborhoodWrapper.setEntityYBound(totalEntityYBoundSize);
         }
-        return totalEntityYBoundSize; // Return the total size when done processing (this will be the total size taken up on the canvas)
+        int height = calculateHeight(neighborhoodWrapper);
+        int width = calculateWidth(neighborhoodWrapper);
+        neighborhoodWrapper.getNeighborhoodShape().setHeight(height);
+        neighborhoodWrapper.getNeighborhoodShape().setWidth(width);
     }
 
-    private int calculateYHeight(List<PointShape> shapes) {
-        if (shapes.isEmpty()) {
-            return 0; // When the list is empty
+    private int calculateHeight(NeighborhoodWrapper neighborhoodWrapper) {
+        int padding = 10;
+        int entityYBound = neighborhoodWrapper.getEntityYBound();
+
+        if (neighborhoodWrapper.getNeighborhoods().isEmpty()) {
+            return entityYBound;
+        } else {
+            int subNeighborhoodHeight = neighborhoodWrapper.getNeighborhoods()
+                    .stream()
+                    .map(NeighborhoodWrapper::getNeighborhoodShape)
+                    .mapToInt(Neighborhood::getHeight)
+                    .map(height -> height + padding)
+                    .sum();
+
+            return entityYBound + padding + subNeighborhoodHeight;
         }
-
-        int maxY = shapes.stream().mapToInt(PointShape::getY).max().orElse(0);
-        int minY = shapes.stream().mapToInt(PointShape::getY).min().orElse(0);
-
-        return maxY - minY;
     }
 
+    private int calculateWidth(NeighborhoodWrapper neighborhoodWrapper) {
+        List<Integer> widthList = new ArrayList<Integer>();
+
+        // Get
+        if (!neighborhoodWrapper.getNeighborhoods().isEmpty()) {
+            int maxSubneighborhoodWidth = neighborhoodWrapper.getNeighborhoods()
+                    .stream()
+                    .map(NeighborhoodWrapper::getNeighborhoodShape)
+                    .mapToInt(Neighborhood::getWidth)
+                    .max()
+                    .orElse(0);
+            widthList.add(maxSubneighborhoodWidth + 20);
+        }
+
+
+        int rightMostShapeX = neighborhoodWrapper.getShapes()
+                .stream()
+                .filter(shape -> shape instanceof PointShape)
+                .map(shape -> (PointShape) shape)
+                .mapToInt(PointShape::getX)
+                .max()
+                .orElse(0);
+
+        widthList.add(rightMostShapeX + 100 + 10);
+        return Collections.max(widthList);
+
+    }
 
 }
