@@ -2,10 +2,28 @@ package org.codevillage;
 
 import java.io.File;
 
-public class JavaEntityFactory {
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-    public JavaEntity createEntityFromFile(File file) {
-        return null;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+
+public class JavaEntityFactory implements EntityFactory{
+
+    @Override
+    public JavaEntity createEntityFromFile(File filename) throws IOException {
+        /* type -> name -> association -> dependency -> LOC -> inheritance -> 
+        realization -> composition */
+        EntityParsingChain p = new CompositionParsingStep(new RealizationParsingStep(
+            new InheritanceParsingStep(new LOCParsingStep(new DependencyParsingStep(
+                new AssociationParsingStep(new NameParsingStep(
+                    new TypeParsingStep(new EntityParsingFinish()))))))));
+
+        String fileContent = Files.readString(Paths.get(filename.toURI()));
+        CompilationUnit compilationUnit = StaticJavaParser.parse(fileContent);
+
+        JavaEntity entity = p.construct(new JavaEntityBuilder(), compilationUnit);
+        return entity;
     }
-
 }
