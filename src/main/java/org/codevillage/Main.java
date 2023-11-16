@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+
 import org.codevillage.fetching.*;
 
 public class Main extends JFrame {
@@ -86,6 +88,7 @@ public class Main extends JFrame {
 
         ShapeChain shapeChain = null;
 
-        // call SourceCodeParser here... not created yet?
+        File directory = new File(linkTextField.getText());
+        SourceCodeParser.parseSourceFiles(directory);
     }
 }
