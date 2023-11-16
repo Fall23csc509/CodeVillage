@@ -43,4 +43,9 @@ public class CanvasData extends PropertyChangeSupport {
     public List<Shape> getShapes() {
         return shapes;
     }
+
+    public void setShapes(List<Shape> newData) {
+        shapes = newData;
+        firePropertyChange("shapes", null, shapes);
+    }
 }
