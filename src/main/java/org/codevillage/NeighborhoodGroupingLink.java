@@ -72,8 +72,10 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
     private ArrayList<JavaEntity> getComposers(NeighborhoodWrapper neighborhoodWrapper, ArrayList<String> composerList) {
         ArrayList<JavaEntity> composers = new ArrayList<>();
         for (String composerName : composerList) {
-            composers.add(getComposer(neighborhoodWrapper, composerName));
-
+            JavaEntity composer = getComposer(neighborhoodWrapper, composerName);
+            if (composer != null) {
+                composers.add(composer);
+            }
         }
         return composers;
     }
@@ -124,8 +126,12 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
             int highVal = 0;
             // Find the most common composition in the current group of sub
             // neighborhood members.
+            ArrayList<String> classNames = (ArrayList<String>) classes.stream().map(JavaClass::getName).collect(Collectors.toList());
             for (JavaClass javaClass : classes) {
                 for (String s : javaClass.getCompositions()) {
+                    if (!classNames.contains(s)) {
+                        break;
+                    }
                     if (!compositions.containsKey(s)) {
                         compositions.put(s, 1);
                     }
@@ -159,6 +165,9 @@ public class NeighborhoodGroupingLink extends ShapeChainLink{
             // Get all the most common compositions by first turning the list of compositions
             // for each current member of the neighborhood into a set. Then run set intersections
             // on each set until only the compositions that appear in all of them are left.
+            if (currentMembers.size() <= 0) {
+                break;
+            }
             HashSet<String> commonCompositions = currentMembers.stream()
                     .map(c -> new HashSet<>(c.getCompositions()))
                     .reduce(new HashSet<>(currentMembers.get(0).getCompositions()),

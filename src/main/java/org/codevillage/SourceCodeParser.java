@@ -19,7 +19,13 @@ public class SourceCodeParser implements Parser {
     // validate java files as source code
     File[] sourceCodeFiles = fileChecker.getFilesToParse(directory);
     for (File file : sourceCodeFiles) {
-      entities.add(entityFactory.createEntityFromFile(file));
+      JavaEntity entity = entityFactory.createEntityFromFile(file);
+      if (entity != null) {
+        entities.add(entity);
+      }
+      else {
+        System.out.println(file.getName() + " is not a valid java file");
+      }
     }
     return entities;
   }

@@ -48,8 +48,8 @@ public class Main extends JFrame {
         String targetPath = targetPathTextField.getText();
         JOptionPane.showMessageDialog(Main.this,
             "Selected Data Type: " + selectedDataType + "\nLink: " + link + "\nTarget Path: " + targetPath);
-        fetch[0].downloadPackage(link, targetPath);
-        File directory = new File(targetPathTextField.getText());
+//        fetch[0].downloadPackage(link, targetPath);
+        File directory = new File("C:/Users/liamh/OneDrive/Desktop/csc509/CodeVillage/temp/src/main/java/org/codevillage");
         SourceCodeParser sourceCodeParser = new SourceCodeParser();
         try {
           ArrayList<JavaEntity> entities = sourceCodeParser.parseSourceFiles(directory);
@@ -84,6 +84,7 @@ public class Main extends JFrame {
 
     Canvas canvas = new Canvas();
     CanvasData data = CanvasData.getInstance();
+    data.addPropertyChangeListener(canvas);
     canvas.setBackground(Color.BLUE); // testing canvas is there
 
     // implement camera

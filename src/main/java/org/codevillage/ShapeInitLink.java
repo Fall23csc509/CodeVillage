@@ -18,6 +18,7 @@ public class ShapeInitLink extends ShapeChainLink {
   public void positionHelper(NeighborhoodWrapper nw, ShapePositioningData shapePositioningData) {
     nw.setNeighborhoodShape(new Neighborhood());
     for (JavaEntity entity : nw.getEntities()) {
+      System.out.println(entity.getName());
       switch (entity.getType()) {
         case JAVA_BASE_CLASS: {
           nw.getShapes().add(handleJavaBaseClass(entity, shapePositioningData));
