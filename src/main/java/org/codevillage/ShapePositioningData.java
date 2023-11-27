@@ -7,6 +7,7 @@ public class ShapePositioningData {
     private static ShapePositioningData instance;
     private NeighborhoodWrapper neighborhoodWrapper;
     private HashSet<String> composerNames;
+    private float averageLOC;
     private ShapePositioningData() {
         neighborhoodWrapper = null;
         composerNames = new HashSet<>();
@@ -16,6 +17,14 @@ public class ShapePositioningData {
             instance = new ShapePositioningData();
         }
         return instance;
+    }
+
+    public float getAverageLOC() {
+        return this.averageLOC;
+    }
+
+    public void setAverageLOC(float averageLOC) {
+        this.averageLOC = averageLOC;
     }
 
     public NeighborhoodWrapper getNeighborhoodWrapper() {

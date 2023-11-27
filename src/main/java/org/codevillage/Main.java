@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.codevillage.fetching.*;
 import java.io.IOException;
@@ -35,7 +37,9 @@ public class Main extends JFrame {
     String[] dataTypes = { "GitHub", "Subversion", "Local Drive" };
     JComboBox<String> dataTypeDropdown = new JComboBox<>(dataTypes);
     JButton submitButton = new JButton("Submit");
-
+    // logic
+    DataFetcher[] fetch = { null };
+    fetch[0] = new GithubDataFetcher();
     submitButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -44,6 +48,29 @@ public class Main extends JFrame {
         String targetPath = targetPathTextField.getText();
         JOptionPane.showMessageDialog(Main.this,
             "Selected Data Type: " + selectedDataType + "\nLink: " + link + "\nTarget Path: " + targetPath);
+        fetch[0].downloadPackage(link, targetPath);
+        File directory = new File(targetPathTextField.getText());
+        SourceCodeParser sourceCodeParser = new SourceCodeParser();
+        try {
+          ArrayList<JavaEntity> entities = sourceCodeParser.parseSourceFiles(directory);
+          NeighborhoodGroupingLink neighborhoodGroupingLink = new NeighborhoodGroupingLink(
+                  new InterfaceInsertLink(
+                          new ShapeInitLink(
+                                  new ShapesRelativePositioningLink(
+                                          new NeighborhoodDimensionsLink(
+                                                  new NeighborhoodAbsolutePositioningLink(
+                                                          new ShapesAbsolutePositioningLink(
+                                                                  new PutShapesChainEnd()
+                                                          )
+                                                  )
+                                          )
+                                  )
+                          ))
+          );
+          neighborhoodGroupingLink.position(entities);
+        } catch (IOException ioError) {
+          ioError.printStackTrace();
+        }
       }
     });
 
@@ -67,8 +94,6 @@ public class Main extends JFrame {
     mainPanel.add(canvas, BorderLayout.CENTER);
     add(mainPanel);
 
-    // logic
-    final DataFetcher[] fetch = { null };
     dataTypeDropdown.addItemListener(new ItemListener() {
       @Override
       public void itemStateChanged(ItemEvent e) {
@@ -76,26 +101,13 @@ public class Main extends JFrame {
           String selectedDataType = (String) e.getItem();
           if ("GitHub".equals(selectedDataType)) {
             fetch[0] = new GithubDataFetcher();
-            fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
           } else if ("Subversion".equals(selectedDataType)) {
             fetch[0] = new SVNDataFetcher();
-            fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
           } else {
             fetch[0] = new LocalDataFetcher();
-            fetch[0].downloadPackage(linkTextField.getText(), targetPathTextField.getText());
           }
         }
       }
     });
-
-    ShapeChain shapeChain = null;
-
-    File directory = new File(linkTextField.getText());
-    SourceCodeParser sourceCodeParser = new SourceCodeParser();
-    try {
-      sourceCodeParser.parseSourceFiles(directory);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 }

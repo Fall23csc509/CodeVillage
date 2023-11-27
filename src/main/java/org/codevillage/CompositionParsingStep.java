@@ -4,16 +4,13 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CompositionParsingStep extends EntityParsingStep {
 
     public CompositionParsingStep(EntityParsingChain next) {
         super(next);
     }
-      
-    @Override
+
     public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
         // Parse the CompilationUnit to find composition relationships
         CompositionVisitor visitor = new CompositionVisitor();

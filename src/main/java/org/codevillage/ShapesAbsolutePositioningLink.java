@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ShapeAbsolutePositioningLink extends ShapeChainLink {
+public class ShapesAbsolutePositioningLink extends ShapeChainLink {
 
-    public ShapeAbsolutePositioningLink(ShapeChain next) {
+    public ShapesAbsolutePositioningLink(ShapeChain next) {
         super(next);
     }
 
@@ -48,7 +48,7 @@ public class ShapeAbsolutePositioningLink extends ShapeChainLink {
     }
 }
 
-class ShapeAbsolutePositioningLinkTest {
+class ShapesAbsolutePositioningLinkTest {
 
    @Test
     void testPosition_1() {
@@ -97,7 +97,7 @@ class ShapeAbsolutePositioningLinkTest {
 
         ShapePositioningData.getInstance().setNeighborhoodWrapper(nw);
 
-        ShapeAbsolutePositioningLink sapl = new ShapeAbsolutePositioningLink(null);
+        ShapesAbsolutePositioningLink sapl = new ShapesAbsolutePositioningLink(null);
         sapl.position(null);
         assertEquals(((PointShape) nw.getShapes().get(0)).getX(), 10);
         assertEquals(((PointShape) nw.getShapes().get(0)).getY(), 10);
