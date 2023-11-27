@@ -11,7 +11,7 @@ public class ShapeInitLink extends ShapeChainLink {
   public void position(ArrayList<JavaEntity> ignored) {
     ShapePositioningData shapePositioningData = ShapePositioningData.getInstance();
     NeighborhoodWrapper wrapper = shapePositioningData.getNeighborhoodWrapper();
-
+    positionHelper(wrapper, shapePositioningData);
     next.position(ignored);
   }
 
