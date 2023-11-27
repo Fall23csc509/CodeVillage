@@ -2,17 +2,15 @@ package org.codevillage;
 
 import com.github.javaparser.ast.CompilationUnit;
 
-public class AssociationParsingStep extends EntityParsingStep{
+public class AssociationParsingStep extends EntityParsingStep {
 
-    public AssociationParsingStep(EntityParsingChain next) {
-        super(next);
-        //TODO Auto-generated constructor stub
-    }
+  public AssociationParsingStep(EntityParsingChain next) {
+    super(next);
+  }
 
-    @Override
-    public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'construct'");
-    }
+  @Override
+  public JavaEntity construct(EntityBuilder builder, CompilationUnit declaration) {
+    throw new UnsupportedOperationException("Unimplemented method 'construct'");
+  }
 
 }

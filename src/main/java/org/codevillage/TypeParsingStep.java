@@ -9,6 +9,7 @@ import com.github.javaparser.utils.SourceRoot;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.io.IOException;
 
 public class TypeParsingStep extends EntityParsingStep {
     public TypeParsingStep(EntityParsingChain next) {
