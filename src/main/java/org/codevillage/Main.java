@@ -48,8 +48,10 @@ public class Main extends JFrame {
         String targetPath = targetPathTextField.getText();
         JOptionPane.showMessageDialog(Main.this,
             "Selected Data Type: " + selectedDataType + "\nLink: " + link + "\nTarget Path: " + targetPath);
-//        fetch[0].downloadPackage(link, targetPath);
-        File directory = new File("C:/Users/liamh/OneDrive/Desktop/csc509/CodeVillage/temp/src/main/java/org/codevillage");
+        // fetch[0].downloadPackage(link, targetPath);
+
+        // note: comment out these lines to download, then comment out fetch to run
+        File directory = new File("C:/Users/sugoi/Documents/509/versionthree/CodeVillage/download/src/main/java/org/codevillage");
         SourceCodeParser sourceCodeParser = new SourceCodeParser();
         try {
           ArrayList<JavaEntity> entities = sourceCodeParser.parseSourceFiles(directory);
